@@ -8,4 +8,5 @@ spec:
     targetPort: vprodb-port
     protocol: TCP
   selector:
-    app: vprodb  
+    app: vprodb
+  type: ClusterIP
