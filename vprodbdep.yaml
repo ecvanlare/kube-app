@@ -29,21 +29,20 @@ spec:
                 secretKeyRef:
                   name: app-secret
                   key: db-pass
-      # You can still use nodeSelector, but node affinity is preferred
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: zone
-                operator: In
-                values:
-                - us-east-1a
+              - matchExpressions:
+                  - key: failure-domain.beta.kubernetes.io/zone
+                    operator: In
+                    values:
+                      - us-east-1a
       volumes:
         - name: vpro-db-data
           awsElasticBlockStore:
-             volumeID: vol-08fed050cf3842cfa
-             fsType: ext4
+            volumeID: vol-08fed050cf3842cfa
+            fsType: ext4
 
       initContainers:
         - name: busybox
